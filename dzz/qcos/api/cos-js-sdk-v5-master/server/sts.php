@@ -1,5 +1,8 @@
 <?php
 // 临时密钥计算样例
+define('CURSCRIPT', 'dzz');
+define('DZZSCRIPT', 'dzz');
+define('BASESCRIPT', 'dzz');
 require_once('../../../../.././core/coreBase.php');
 $dzz = C::app();
 
