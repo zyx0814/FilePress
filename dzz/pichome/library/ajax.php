@@ -2514,7 +2514,7 @@ elseif($operation == 'realfianllypath'){
             $rids[] = $patharr[0];
         }
     }
-    if($_G['adminid'] == 1){
+    if($rids){
         C::t('pichome_resources')->update($rids,array('level'=>$level));
     }
     exit(json_encode(['success'=>true]));
