@@ -42,6 +42,7 @@ if($do == 'filelist'){
         $perpage = $limit;
     }
     $order = isset($_GET['order']) ? trim($_GET['order']) : 'desc';
+    if(!in_array($order, array('desc', 'asc'))) $order = 'desc';
     $orderby = isset($_GET['orderby']) ? trim($_GET['orderby']) : 'dateline';
     if(!in_array($orderby,array('dateline'))) $orderby = 'dateline';
     $ordersql="order by $orderby $order";
