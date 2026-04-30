@@ -715,6 +715,14 @@ elseif ($_GET['step'] == 'prepare') {
                     'showadmin'=>1
                 ),1,false,true);
             if($appid) { //增加hooks
+                //处理后缀关联
+                if(!DB::result_first("select count(*) from %t where ext='md'",array('app_open'))){
+                    DB::insert('app_open',array(
+                        'ext'=>'md',
+                        'appid'=>$appid,
+                        'default'=>1
+                    ),1,1);
+                }
                 //处理相关挂载点
                 if ($hid = DB::result_first("select id from %t where addons = %s", array('hooks', 'dzz\markdown\classes\mdtohtml'),true)) {
                     DB::update('hooks', array('app_market_id' => $appid), array('id' => $hid));

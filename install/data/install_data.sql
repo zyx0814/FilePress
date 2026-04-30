@@ -426,7 +426,8 @@ INSERT INTO `dzz_app_open` (`ext`, `appid`, `disp`, `extid`, `isdefault`) VALUES
 ('QCOS::xml', 10, 0, 114, 1),
 ('QCOS::htm', 10, 0, 115, 1),
 ('QCOS::html', 10, 0, 116, 1),
-('pdf', 11, 0, 117, 1);
+('pdf', 11, 0, 117, 1),
+('md', 26, 0, 118, 1);
 --
 -- 转存表中的数据 `dzz_user_field`
 --
