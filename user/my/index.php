@@ -73,8 +73,8 @@ if($do=='getNavigation'){
     if(strpos($info['mime'],'image/')!==0){
         exit(json_encode(array('error' => 'file is not invalite')));
     }
-    $type = pathinfo($files['name'],PATHINFO_EXTENSION);
-    if (!preg_match('/(gif|jpe?g|png)$/i', $type) || !preg_match('/(gif|jpe?g|png)$/i', $files['type'])|| $files['size'] >= 1024 * 1024 * 2) {
+    $type = dzz_safe_upload_image_extension($info['mime']);
+    if (!$type || $files['size'] >= 1024 * 1024 * 2) {
         exit(json_encode(array('error' => 'file is not invalite')));
     }
     $imgpath = './data/avatar/'.md5($uid).'.'.$type;
@@ -327,5 +327,17 @@ function upBase64($base64Data, $uid)
         }
         @unlink($temp);
         return $success;
+    }
+}
+
+if (!function_exists('dzz_safe_upload_image_extension')) {
+    function dzz_safe_upload_image_extension($mime) {
+        $types = array(
+            'image/gif' => 'gif',
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+        );
+        $mime = strtolower(trim($mime));
+        return isset($types[$mime]) ? $types[$mime] : false;
     }
 }
