@@ -557,7 +557,7 @@ class localexport
 
     public function check_file($total)
     {
-        if ($this->lastid < 1) $this->lastid = 1;
+        if ($this->lastid < 1) $this->lastid = 0;
         $limitsql = ($this->lastid) . ',' . $this->checklimit;
         if(dzz_process::getlocked($this->processname)) exit('vapp isdeleted');
         $delrids = [];
@@ -565,8 +565,6 @@ class localexport
 
         if (empty($data))
         {
-
-
             C::t('pichome_vapp')->update($this->appid, array('percent' => 0, 'state' => 4, 'lastid' => 0, 'donum' => 0));
             //处理目录数据
             $folderdata = DB::fetch_all("select fid,pathkey from %t where appid = %s",array('pichome_folder',$this->appid));
@@ -643,8 +641,8 @@ left join %t o on o.rid = ra.rid where ra.appid = %s and ((ra.isget = 0 and ISNU
             $filenum = $total - count($delrids);
             //如果有需要删除的，删除后，则重新查询上一页数据
             $percent = round(($this->lastid / $total) * 100);
-
             $percent = ($percent > 100) ? 100:$percent;
+
             C::t('pichome_vapp')->update($this->appid, array('lastid' => $this->lastid, 'percent' => $percent, 'state' => 3, 'filenum' => $filenum));
         } else {
 
@@ -652,6 +650,7 @@ left join %t o on o.rid = ra.rid where ra.appid = %s and ((ra.isget = 0 and ISNU
             $percent = ($percent > 100) ? 100:$percent;
 
             C::t('pichome_vapp')->update($this->appid, array('lastid' => $this->lastid, 'percent' => $percent, 'state' => 3));
+
         }
     }
 

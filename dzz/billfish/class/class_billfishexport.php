@@ -1267,8 +1267,8 @@ class billfishxport
 
     public function check_file($total)
     {
-        if ($this->lastid < 1) $this->lastid = 1;
-        $limitsql = ($this->lastid - 1) * $this->checklimit . ',' . $this->checklimit;
+        if ($this->lastid < 1) $this->lastid = 0;
+        $limitsql = ($this->lastid)  . ',' . $this->checklimit;
 
         $delrids = [];
         $data = DB::fetch_all("select rid,name from %t where appid = %s order by lastdate asc limit $limitsql ", array('pichome_resources', $this->appid));
