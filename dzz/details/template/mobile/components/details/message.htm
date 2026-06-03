@@ -14,36 +14,43 @@
 	<div style="position: relative;background: var(--el-bg-color);padding: 15px;" v-cloak>
 
 		<div class="DetailPopup-content" style="padding: 0 16px;">
-<!-- 			<template v-if="ParamDetail.messageloading">
-				<el-loading class="custom-load" size="24px" type="spinner" color="var(--header-text)" vertical>加载中...</el-loading>
-			</template>
-			<template v-else> -->
+
 				<div class="name">
-					<el-image v-if="parseInt(showdata[showdataindex].data.level)==1"
-						 style="width: 25px; height: 25px;vertical-align: bottom;"
-						fit="contain"
-						src="dzz/pichome/image/grade/1.png"
-					/>
-					<el-image v-else-if="parseInt(showdata[showdataindex].data.level)==2"
-						 style="width: 25px; height: 25px;vertical-align: bottom;"
-						fit="contain"
-						src="dzz/pichome/image/grade/2.png"
-					/>
-					<el-image v-else-if="parseInt(showdata[showdataindex].data.level)==3"
-						 style="width: 25px; height: 25px;vertical-align: bottom;"
-						fit="contain"
-						src="dzz/pichome/image/grade/3.png"
-					/>
-					<el-image v-else-if="parseInt(showdata[showdataindex].data.level)==4"
-						 style="width: 25px; height: 25px;vertical-align: bottom;"
-						fit="contain"
-						src="dzz/pichome/image/grade/4.png"
-					/>
-					<el-image v-else-if="parseInt(showdata[showdataindex].data.level)==5"
-						 style="width: 25px; height: 25px;vertical-align: bottom;"
-						fit="contain"
-						src="dzz/pichome/image/grade/5.png"
-					/>
+					<template v-if="parseInt(showdata[showdataindex].data.level)==1">
+						<el-image
+							 style="width: 25px; height: 25px;vertical-align: bottom;"
+							fit="contain"
+							src="dzz/pichome/image/grade/1.png"
+						></el-image>
+					</template>
+					<template v-else-if="parseInt(showdata[showdataindex].data.level)==2">
+						<el-image
+							 style="width: 25px; height: 25px;vertical-align: bottom;"
+							fit="contain"
+							src="dzz/pichome/image/grade/2.png"
+						></el-image>
+					</template>
+					<template v-else-if="parseInt(showdata[showdataindex].data.level)==3">
+						<el-image
+								style="width: 25px; height: 25px;vertical-align: bottom;"
+								fit="contain"
+								src="dzz/pichome/image/grade/3.png"
+						></el-image>
+					</template>
+					<template v-else-if="parseInt(showdata[showdataindex].data.level)==4">
+						<el-image
+								style="width: 25px; height: 25px;vertical-align: bottom;"
+								fit="contain"
+								src="dzz/pichome/image/grade/4.png"
+						></el-image>
+					</template>
+					<template v-else-if="parseInt(showdata[showdataindex].data.level)==5">
+						<el-image
+								style="width: 25px; height: 25px;vertical-align: bottom;"
+								fit="contain"
+								src="dzz/pichome/image/grade/5.png"
+						></el-image>
+					</template>
 					{{showdata[showdataindex].data.name}}.{{showdata[showdataindex].data.ext}}
 				</div>
 				<div class="block" v-if="showdata[showdataindex].data.colors && showdata[showdataindex].data.colors.length">
