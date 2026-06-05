@@ -116,7 +116,9 @@ class localexport
             $this->filenum = 0;
             if(dzz_process::getlocked($this->processname)) exit('vapp isdeleted');
             C::t('pichome_vapp')->update($this->appid, array( 'state' => 1));
-            $thandle = fopen($readtxt, 'w+');
+            if(!$thandle = fopen($readtxt, 'w+')) {
+                return array('error' => 'Please grant write permission to the data/attachment directory');
+            }
             if($this->iscloud){
                 $fileinfo = $this->readClouddata($thandle,$filedir);
             }else{
@@ -125,7 +127,6 @@ class localexport
             fclose($thandle);
 
             if ($fileinfo['error']) {
-
                 C::t('pichome_vapp')->update($this->appid, array('state' => -1));
                 return $fileinfo;
             } else {

@@ -571,7 +571,7 @@
                         data = status;//返回原先状态
 						self.$notify.error({//错误提示
 							title: '{lang error}',
-							message: json.error
+							message: res.error || '{lang do_failed}'
 						});
 
                     }

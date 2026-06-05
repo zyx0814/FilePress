@@ -227,9 +227,12 @@ class eagleexport
         if ($this->iscloud) {
             $readreturn = $this->readcloudDirdata($filedir);
         } else {
-            $thandle = fopen($readtxt, 'w+');
+            if(!$thandle = fopen($readtxt, 'w+')) {
+                return array('error' => 'Please grant write permission to the data/attachment directory');
+            }
             $readreturn = $this->readLocalDirdata($thandle, $filedir);
             fclose($thandle);
+
         }
 
         if ($readreturn['error']) {
