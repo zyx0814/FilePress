@@ -59,7 +59,7 @@ elseif($do=='fetch'){
         $setarr = [
             'title' => isset($_GET['title']) ? trim($_GET['title']) : '',
 		    'exts'=>htmlspecialchars($_GET['exts']),
-		    'searchRange'=>implode(',',$_GET['searchRange']),
+            'searchRange'=>!empty($_GET['searchRange'])?implode(',',$_GET['searchRange']):'',
 			'screen' => json_encode(isset($_GET['screen']) ? $_GET['screen'] : []),
 			'pagesetting' => json_encode(isset($_GET['pagesetting']) ? ($_GET['pagesetting']) : []),
 			'disp'=>intval($_GET['disp'])
