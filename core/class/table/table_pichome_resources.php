@@ -552,6 +552,7 @@ class table_pichome_resources extends dzz_table
 
         if($cachedata=$this->fetch_cache($cachekey)) {
             $resourcesdata = $cachedata;
+            $resourcesdata['tag'] = C::t('pichome_resourcestag')->fetch_tag_by_rid($rid);
         }else{
             if (!$resourcesdata = parent::fetch($rid)) return array();
             if ($resourcesdata['isdelete'] > 0 && !$contaiondel) return array();

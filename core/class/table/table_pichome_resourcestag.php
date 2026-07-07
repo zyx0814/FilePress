@@ -48,7 +48,7 @@
         }
         public  function delete_by_rids_tids($rids,$tids){
             if(!is_array($rids)) $rids = (array)$rids;
-            if(!is_array($tids)) $rids = (array)$tids;
+            if(!is_array($tids)) $tids = (array)$tids;
             foreach(DB::fetch_all("select id,tid,appid,rid from %t where rid in(%n) and tid in (%n)",array($this->_table,$rids,$tids)) as $v){
                 $dids[] = $v['id'];
                 C::t('pichome_resources_tag')->delete_by_tid_appid($v['tid'],$v['appid']);
