@@ -13,8 +13,10 @@ Hook::listen('adminlogin');
 include_once libfile('function/cache');
 include_once libfile('function/organization');
 $operation = empty($_GET['operation']) ? 'basic' : trim($_GET['operation']);
-$setting = C::t('setting')->fetch_all(null);
 $checkLanguage = checkLanguage();
+$setting = C::t('setting')->fetch_all(null);
+Hook::listen("lang_parse", $setting, ['getSettingLangKey']);
+Hook::listen("lang_parse", $setting, ['getSettingLangData', 0]);
 //基本设置
 if ($operation == 'basic') {
     $serverspace = C::t('local_storage')->fetch_all_orderby_disp();
@@ -45,7 +47,8 @@ if ($operation == 'basic') {
         $setting['sitelogoPath'] =getglobal('setting/attachurl').'sitelogo/sitelogo.png?'.VERHASH;
 
         exit(json_encode(array('settingdata' => $setting, 'appdata' => $applist,'serverspace'=>$serverspace)));
-    } else {
+    }
+    else {
         $settingnew = $_GET['settingnew'];
         $settingnew['bbname'] = $settingnew['sitename'];
         if(isset($settingnew['pathinfo'])){
@@ -106,7 +109,8 @@ if ($operation == 'basic') {
         updatesetting($setting,$settingnew);
         exit(json_encode(array('success'=>true)));
     }
-}elseif($operation == 'upload'){//上传设置
+}
+elseif($operation == 'upload'){//上传设置
     if(!submitcheck('settingsubmit')){
         $setting['maxChunkSize'] = round($setting['maxChunkSize'] / (1024 * 1024), 2);
         $navtitle = lang('upload_set');
@@ -131,7 +135,8 @@ if ($operation == 'basic') {
         updatecache('usergroups');
         exit(json_encode(array('success'=>true)));
     }
-}elseif($operation == 'loginset'){//登录页设置
+}
+elseif($operation == 'loginset'){//登录页设置
     if(!submitcheck('settingsubmit')) {
         exit(json_encode(array('setting'=>$setting)));
     }else{
@@ -172,7 +177,8 @@ if ($operation == 'basic') {
         updatesetting($setting,$settingnew);
         exit(json_encode(array('success'=>true)));
     }
-}elseif($operation == 'mail'){
+}
+elseif($operation == 'mail'){
     if(!submitcheck('settingsubmit')) {
         $passwordmask = $setting['mail']['auth_password'] ? $setting['mail']['auth_password'][0] . '********' . substr($setting['mail']['auth_password'], -2) : '';
         $smtps = array();
@@ -218,7 +224,8 @@ if ($operation == 'basic') {
         updatesetting($setting,$settingnew);
         exit(json_encode(array('success'=>true)));
     }
-}elseif($operation == 'uploadsitelogo'){
+}
+elseif($operation == 'uploadsitelogo'){
     global $_G;
     $files = $_FILES['files'];
     if($files["type"] != 'image/png' && $files["type"] != 'image/jpeg' && $files["type"] != 'image/jpg'){
@@ -273,7 +280,8 @@ elseif($operation == 'mailcheck'){//邮件检测
 		}
 		
 	}
-}elseif($operation == 'image'){//缩略图设置
+}
+elseif($operation == 'image'){//缩略图设置
     if(!submitcheck('settingsubmit')) {
         $setting['thumbsize'] = ($setting['thumbsize']);
         foreach ($setting['thumbsize'] as $key => $value) {
@@ -305,7 +313,8 @@ elseif($operation == 'mailcheck'){//邮件检测
         updatesetting($setting,$settingnew);
         exit(json_encode(array('success'=>true)));
     }
-}elseif($operation == 'waterimg'){
+}
+elseif($operation == 'waterimg'){
     global $_G;
     $files = $_FILES['file'];
 
@@ -396,7 +405,8 @@ elseif($operation == 'mailcheck'){//邮件检测
     }else{
         exit(json_encode(array('error'=>'upload failer')));
     }
-}elseif($operation == 'watermark'){//水印设置
+}
+elseif($operation == 'watermark'){//水印设置
     if(!submitcheck('settingsubmit')) {
         $fontlist = array();
         $dir = opendir(DZZ_ROOT.'./static/image/seccode/font/en');

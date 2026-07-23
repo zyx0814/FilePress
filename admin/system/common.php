@@ -40,7 +40,6 @@ if($operation == 'getApp'){//获取当前用户应用
 						$newappids[] = $appid;
 					}
 				}
-				if ($newappids) C::t('app_user')->insert_by_uid($_G['uid'], $newappids);
 				C::t('user_field')->update($_G['uid'], array('applist' => implode(',', $applist)));
 			}
 		 }

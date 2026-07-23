@@ -50,8 +50,17 @@
     elseif($operation == 'cron'){
 		$do = isset($_GET['do']) ? trim($_GET['do']) : '';
 		if($do == 'view'){
-			if(submitcheck('addsubmit')){
-				$newname = isset($_GET['newname']) ? trim($_GET['newname']) : '';
+            if(submitcheck('cronssubmit')) {
+                $cronid = isset($_GET['perm']['cronid']) ? intval($_GET['perm']['cronid']) : '';
+                if ($cronid) {
+                    $cron = DB::fetch_first("SELECT * FROM %t WHERE cronid=%d", array('cron', $cronid));
+                    $available = intval($_GET['perm']['available']);
+                    $name = getstr($_GET['perm']['name']);
+                    DB::update('cron', array('available' => $available, 'name' => $name), ['cronid' => $cronid]);
+                    exit(json_encode(array('success' => true, 'data' => $cron)));
+                }
+            }elseif(submitcheck('addsubmit')){
+                $newname = isset($_GET['newname']) ? trim($_GET['newname']) : '';
 				if ($newname) {
 					$arr = array(
 						'name' => dhtmlspecialchars($newname), 

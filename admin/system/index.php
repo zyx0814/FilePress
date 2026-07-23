@@ -11,8 +11,4 @@ if (!defined('IN_OAOOA') || !defined('IN_ADMIN')) {
 }
 require_once(__DIR__.'/dist/index.html');
 exit();
-$operation = $_GET['operation'] ? $_GET['operation'] : 'updatecache';
-$url=getglobal('siteurl'). BASESCRIPT . '?mod=system&op=' . $operation;
-$url = outputurl($url); 
-@header("location: $url");
 ?>
