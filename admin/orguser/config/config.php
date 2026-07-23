@@ -7,5 +7,4 @@
  */
 return array(
     'allow_robot'=>false,
-    'default_op'=>'cloudindex',
 );
