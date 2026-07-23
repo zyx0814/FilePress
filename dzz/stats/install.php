@@ -27,7 +27,7 @@ CREATE TABLE `pichome_stats_keyword`  (
   INDEX `gid`(`idval`) USING BTREE,
   INDEX `username`(`username`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE
-) ENGINE = MyISAM;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for pichome_stats_token
@@ -41,7 +41,7 @@ CREATE TABLE `pichome_stats_token`  (
   `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用，暂时记录为应用名称',
   `totaltoken` int(11) UNSIGNED NULL DEFAULT NULL COMMENT '消耗token总数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for pichome_stats_userlogin
@@ -57,7 +57,7 @@ CREATE TABLE `pichome_stats_userlogin`  (
   `isadmin` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '是否为后端登录',
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录提示信息',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM;
+) ENGINE=InnoDB;
 
 -- ----------------------------
 -- Table structure for pichome_stats_view
@@ -78,7 +78,7 @@ CREATE TABLE `pichome_stats_view`  (
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `username`(`username`) USING BTREE,
   INDEX `idval`(`idval`) USING BTREE
-) ENGINE = MyISAM;
+) ENGINE=InnoDB;
 
 
 EOF;
