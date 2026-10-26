@@ -113,7 +113,7 @@ if(!isset($_GET['loginsubmit'])) {//是否提交
 
     } else {//登录失败记录日志 
         //写入日志
-        $errorlog=lang('user').($result['ucresult']['email'] ? $result['ucresult']['email'] : $_GET['email']).lang('try_log')."[".$_GET['password']."]"."\t".lang('error');
+        $errorlog=lang('user').($result['ucresult']['email'] ? $result['ucresult']['email'] : htmlspecialchars($_GET['email'])).lang('try_log')."[".htmlspecialchars($_GET['password'])."]"."\t".lang('error');
         writelog('loginlog', $errorlog);
         $isadmin = (getglobal('adminid')) ? 1 : 0;
         addLoginStats(lang('login_success'),$isadmin);
